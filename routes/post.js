@@ -21,6 +21,7 @@ router.get('/allpost',requireLogin,(req,res)=>{
 router.get('/getsubpost',requireLogin,(req,res)=>{
 
     // if postedBy in following
+    // The $in operator selects the documents where the value of a field equals any value in the specified array
     Post.find({postedBy:{$in:req.user.following}})
     .populate("postedBy","_id name")
     .populate("comments.postedBy","_id name")
@@ -36,9 +37,10 @@ router.get('/getsubpost',requireLogin,(req,res)=>{
 router.post('/createpost',requireLogin,(req,res)=>{
     const {title,body,pic} = req.body 
     if(!title || !body || !pic){
-      return  res.status(422).json({error:"Plase add all the fields"})
+      return  res.status(422).json({error:"Please add all the fields"})
     }
     req.user.password = undefined
+    // We don't wanna add the password to the post info
     const post = new Post({
         title,
         body,
@@ -101,6 +103,7 @@ router.put('/comment',requireLogin,(req,res)=>{
         $push:{comments:comment}
     },{
         new:true
+        
     })
     .populate("comments.postedBy","_id name")
     .populate("postedBy","_id name")
