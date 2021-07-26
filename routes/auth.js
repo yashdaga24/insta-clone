@@ -34,6 +34,7 @@ router.post('/signup', (req, res) => {
           .status(422)
           .json({ error: 'User already exists with that email' });
       }
+      // This 12 is not needed later while checking as the hash stores this salt
       bcrypt.hash(password, 12).then((hashedpassword) => {
         const user = new User({
           email,
@@ -49,7 +50,7 @@ router.post('/signup', (req, res) => {
               to: user.email,
               from: 'yashdaga26@gmail.com',
               subject: 'signup success',
-              html: '<h1>welcome to instagram</h1>',
+              html: '<h1>Welcome to Slate</h1>',
             });
             res.json({ message: 'saved successfully' });
           })
@@ -103,6 +104,7 @@ router.post('/signin', (req, res) => {
               private,
               pendingrequests,
             },
+            // If we send directly password will also be sent
           });
         } else {
           return res.status(422).json({ error: 'Invalid Email or password' });
