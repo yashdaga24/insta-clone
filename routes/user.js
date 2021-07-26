@@ -17,6 +17,7 @@ router.get('/user/:id', requireLogin, (req, res) => {
             return res.status(422).json({ error: err });
           }
           res.json({ user, posts });
+          // To get profile of a user
         });
     })
     .catch((err) => {
@@ -167,6 +168,7 @@ router.put('/updatepic', requireLogin, (req, res) => {
 
 router.post('/search-users', (req, res) => {
   let userPattern = new RegExp('^' + req.body.query);
+  // regex provides regular expression capabilities for pattern matching strings in queries
   User.find({ email: { $regex: userPattern } })
     .select('_id email')
     .then((user) => {
@@ -192,7 +194,7 @@ router.put('/toggleprivate', requireLogin, (req, res) => {
     { new: true },
     (err, result) => {
       if (err) {
-        return res.status(422).json({ error: 'Cannot set private' });
+        return res.status(422).json({ error: 'Cannot Toggle' });
       }
       res.json(result);
     }
