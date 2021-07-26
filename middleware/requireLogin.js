@@ -25,7 +25,7 @@ module.exports = (req,res,next)=>{
         const {_id} = payload
         User.findById(_id).then(userdata=>{
             req.user = userdata
-            next() // Only executed after User is found as it returns a promise
+            next() // Only executed after User is found
         })
         
         
