@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import M from 'materialize-css';
-const SignIn = () => {
+const SignUp = () => {
   const history = useHistory();
   const [name, setName] = useState('');
   const [password, setPasword] = useState('');
@@ -117,4 +117,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
