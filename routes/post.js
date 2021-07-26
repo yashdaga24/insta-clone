@@ -123,6 +123,7 @@ router.delete('/deletepost/:postId',requireLogin,(req,res)=>{
         if(err || !post){
             return res.status(422).json({error:err})
         }
+        // Since _id is object and objects equality cannot be checked directly for objects
         if(post.postedBy._id.toString() === req.user._id.toString()){
               post.remove()
               .then(result=>{
