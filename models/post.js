@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const {ObjectId} = mongoose.Schema.Types
+const {ObjectId} = mongoose.Schema.Types // Object Id has to be either deconstructed earlier or written like mongoose.Schema.Types.ObjectId
 const postSchema = new mongoose.Schema({
     title:{
         type:String,
